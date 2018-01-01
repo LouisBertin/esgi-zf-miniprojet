@@ -7,8 +7,9 @@
 
 namespace Application;
 
+use Application\Controller\IndexController;
+use Application\Controller\MeetupController;
 use Zend\Router\Http\Literal;
-use Zend\Router\Http\Segment;
 use Zend\ServiceManager\Factory\InvokableFactory;
 
 return [
@@ -24,13 +25,13 @@ return [
                     ],
                 ],
             ],
-            'application' => [
-                'type'    => Segment::class,
+            'meetup' => [
+                'type' => Literal::class,
                 'options' => [
-                    'route'    => '/application[/:action]',
+                    'route'    => '/meetup',
                     'defaults' => [
-                        'controller' => Controller\IndexController::class,
-                        'action'     => 'index',
+                        'controller' => MeetupController::class,
+                        'action'     => 'show',
                     ],
                 ],
             ],
@@ -38,7 +39,8 @@ return [
     ],
     'controllers' => [
         'factories' => [
-            Controller\IndexController::class => InvokableFactory::class,
+            MeetupController::class => InvokableFactory::class,
+            IndexController::class => InvokableFactory::class,
         ],
     ],
     'view_manager' => [
@@ -50,6 +52,7 @@ return [
         'template_map' => [
             'layout/layout'           => __DIR__ . '/../view/layout/layout.phtml',
             'application/index/index' => __DIR__ . '/../view/application/index/index.phtml',
+            'application/meetup/show' => __DIR__ . '/../view/application/meetup/show.phtml',
             'error/404'               => __DIR__ . '/../view/error/404.phtml',
             'error/index'             => __DIR__ . '/../view/error/index.phtml',
         ],
