@@ -34,6 +34,18 @@ return [
                         'action'     => 'show',
                     ],
                 ],
+                'may_terminate' => true,
+                'child_routes' => array(
+                    'add' => array(
+                        'type' => 'literal',
+                        'options' => array(
+                            'route' => '/add',
+                            'defaults' => array(
+                                'action' => 'add',
+                            ),
+                        ),
+                    ),
+                ),
             ],
         ],
     ],
