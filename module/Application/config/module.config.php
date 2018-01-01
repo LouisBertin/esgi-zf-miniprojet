@@ -39,8 +39,8 @@ return [
     ],
     'controllers' => [
         'factories' => [
-            MeetupController::class => InvokableFactory::class,
             IndexController::class => InvokableFactory::class,
+            MeetupController::class => InvokableFactory::class,
         ],
     ],
     'view_manager' => [
