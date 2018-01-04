@@ -3,6 +3,7 @@
 namespace Application\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Zend\Form\Element\DateTime;
 
 /**
  * Class Meeting
@@ -66,17 +67,18 @@ class Meeting
     }
 
     /**
-     * @param mixed $id
+     * @param $id
+     * @return void
      */
-    public function setId($id)
+    public function setId($id) : void
     {
         $this->id = $id;
     }
 
     /**
-     * @return mixed
+     * @return string
      */
-    public function getTitle()
+    public function getTitle() : string
     {
         return $this->title;
     }
@@ -84,7 +86,7 @@ class Meeting
     /**
      * @param mixed $title
      */
-    public function setTitle($title)
+    public function setTitle($title) : void
     {
         $this->title = $title;
     }
@@ -92,7 +94,7 @@ class Meeting
     /**
      * @return mixed
      */
-    public function getDescription()
+    public function getDescription() : string
     {
         return $this->description;
     }
@@ -100,7 +102,7 @@ class Meeting
     /**
      * @param mixed $description
      */
-    public function setDescription($description)
+    public function setDescription($description) : void
     {
         $this->description = $description;
     }
@@ -108,31 +110,31 @@ class Meeting
     /**
      * @return mixed
      */
-    public function getStartingDate()
+    public function getStartingDate() : DateTime
     {
         return $this->startingDate;
     }
 
     /**
-     * @param mixed $startingDate
+     * @param $startingDate
      */
-    public function setStartingDate($startingDate)
+    public function setStartingDate($startingDate) : void
     {
         $this->startingDate = $startingDate;
     }
 
     /**
-     * @return mixed
+     * @return DateTime
      */
-    public function getEndingDate()
+    public function getEndingDate() : DateTime
     {
         return $this->endingDate;
     }
 
     /**
-     * @param mixed $endingDate
+     * @param $endingDate
      */
-    public function setEndingDate($endingDate)
+    public function setEndingDate($endingDate) : void
     {
         $this->endingDate = $endingDate;
     }
