@@ -10,7 +10,7 @@ use Zend\Form\Element\DateTime;
  *
  *
  * @package Application\Entity
- * @ORM\Entity
+ * @ORM\Entity(repositoryClass="\Application\Repository\MeetupRepository")
  * @ORM\Table(name="meeting")
  */
 class Meeting
