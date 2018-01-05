@@ -57,6 +57,15 @@ return [
                             ),
                         ),
                     ),
+                    'delete' => array(
+                        'type' => Segment::class,
+                        'options' => array(
+                            'route' => '/delete/:id',
+                            'defaults' => array(
+                                'action' => 'delete',
+                            ),
+                        ),
+                    ),
                 ),
             ],
         ],

@@ -1,6 +1,6 @@
 <div class="jumbotron">
-    <p>Liste des meetups :</p>
-    <a href="<?= $this->url('meetup/add') ?>">Ajouter un meetup</a>
+    <p>Meetups list :</p>
+    <a href="<?= $this->url('meetup/add') ?>">Add meetup</a>
     <br><br>
 
     <ul>
@@ -8,6 +8,7 @@
             <li>
                 <a href="<?php echo $this->url('meetup/view', ['id' => $meetup['id']]) ?>"><?php echo $meetup['title'] ?></a>
                 <?php echo $meetup['startingDate']->format('d-m-Y') ?>
+                <a href="<?php echo $this->url('meetup/delete', ['id' => $meetup['id']])?>" style="color: red">delete</a>
             </li>
         <?php endforeach; ?>
     </ul>

@@ -64,4 +64,17 @@ final class MeetupRepository extends EntityRepository
         $endingDate = $startingDate;
         return new Meeting($title, $description, $startingDate, $endingDate);
     }
+
+    /**
+     * @param int $id
+     * @throws \Doctrine\ORM\ORMException
+     * @throws \Doctrine\ORM\OptimisticLockException
+     */
+    public function deleteById(int $id) : void
+    {
+        $meetup = $this->getById($id);
+
+        $this->getEntityManager()->remove($meetup);
+        $this->getEntityManager()->flush();
+    }
 }

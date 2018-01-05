@@ -77,4 +77,11 @@ final class MeetupController extends AbstractActionController
 
         return new ViewModel(['meetup' => $meetup]);
     }
+
+    public function deleteAction()
+    {
+        $this->meetupRepository->deleteById($this->params('id'));
+
+        return $this->redirect()->toRoute('meetup');
+    }
 }
