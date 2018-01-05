@@ -6,14 +6,14 @@ use Doctrine\ORM\Mapping as ORM;
 use DateTime;
 
 /**
- * Class Meeting
+ * Class Meetup
  *
  *
  * @package Application\Entity
  * @ORM\Entity(repositoryClass="\Application\Repository\MeetupRepository")
- * @ORM\Table(name="meeting")
+ * @ORM\Table(name="meetup")
  */
-class Meeting
+class Meetup
 {
     /**
      * @ORM\Column(type="string", type="integer", nullable=false, length=50)

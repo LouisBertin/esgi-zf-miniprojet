@@ -32,7 +32,7 @@ final class MeetupController extends AbstractActionController
     }
 
     /**
-     * view to show meeting
+     * show all meetup
      * @return ViewModel
      */
     public function showAction()
