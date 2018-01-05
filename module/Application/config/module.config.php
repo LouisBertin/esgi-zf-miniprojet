@@ -9,6 +9,7 @@ namespace Application;
 
 use Application\Controller\IndexController;
 use Application\Controller\MeetupController;
+use Application\Controller\MeetupControllerFactory;
 use Zend\Router\Http\Literal;
 use Zend\ServiceManager\Factory\InvokableFactory;
 
@@ -52,7 +53,7 @@ return [
     'controllers' => [
         'factories' => [
             IndexController::class => InvokableFactory::class,
-            MeetupController::class => InvokableFactory::class,
+            MeetupController::class => MeetupControllerFactory::class,
         ],
     ],
     'view_manager' => [
