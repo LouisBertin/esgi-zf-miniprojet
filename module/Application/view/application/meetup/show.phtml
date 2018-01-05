@@ -5,7 +5,7 @@
         <?php foreach ($meetups as $meetup): ?>
             <li>
                 <a href="<?php echo $meetup['id'] ?>"><?php echo $meetup['title'] ?></a>
-                <?php echo $meetup['startingDate'] ?>
+                <?php echo $meetup['startingDate']->format('d-m-Y') ?>
             </li>
         <?php endforeach; ?>
     </ul>

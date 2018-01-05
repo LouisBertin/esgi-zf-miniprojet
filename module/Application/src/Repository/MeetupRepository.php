@@ -11,22 +11,20 @@ use Doctrine\ORM\EntityRepository;
 final class MeetupRepository extends EntityRepository
 {
     /**
-     * return meetups
      * @return array
      */
-    public function getMeetup()
+    public function getAllActive() : array
     {
-        $qb = $this->getEntityManager()->createQueryBuilder();
-        $qb
-            ->select(['m.id', 'm.title', 'm.startingDate'])
-            ->from($this->getEntityName() ,'m');
-        $results = $qb->getQuery()->getScalarResult();
+        try {
+            $qb = $this->getEntityManager()->createQueryBuilder();
+            $qb
+                ->select(['m.id', 'm.title', 'm.startingDate'])
+                ->from($this->getEntityName() ,'m');
+            $results = $qb->getQuery()->getResult();
+        } catch (\Exception $e) {
+            echo 'Exception reçue : ',  $e->getMessage(), "\n";
+        }
 
         return $results;
-    }
-
-    public function getMeetupById()
-    {
-
     }
 }

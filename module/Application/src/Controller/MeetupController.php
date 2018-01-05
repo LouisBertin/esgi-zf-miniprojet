@@ -27,7 +27,7 @@ final class MeetupController extends AbstractActionController
      */
     public function showAction()
     {
-        $meetups = $this->meetupRepository->getMeetup();
+        $meetups = $this->meetupRepository->getAllActive();
 
         return new ViewModel(['meetups' => $meetups]);
     }

@@ -42,26 +42,33 @@ class Meeting
     private $endingDate;
 
     /**
+     * @ORM\Column(type="boolean", name="is_active", options={"default" : 1})
+     */
+    private $is_active;
+
+    /**
      * Meeting constructor.
      * @param $id
      * @param $title
      * @param string $description
      * @param $startingDate
      * @param $endingDate
+     * @param $is_active
      */
-    public function __construct($id, $title, $description, $startingDate, $endingDate)
+    public function __construct($id, $title, string $description, $startingDate, $endingDate, $is_active)
     {
         $this->id = $id;
         $this->title = $title;
         $this->description = $description;
         $this->startingDate = $startingDate;
         $this->endingDate = $endingDate;
+        $this->is_active = $is_active;
     }
 
     /**
-     * @return mixed
+     * @return int
      */
-    public function getId()
+    public function getId() : int
     {
         return $this->id;
     }
@@ -137,5 +144,21 @@ class Meeting
     public function setEndingDate($endingDate) : void
     {
         $this->endingDate = $endingDate;
+    }
+
+    /**
+     * @return bool
+     */
+    public function getisActive() : bool
+    {
+        return $this->is_active;
+    }
+
+    /**
+     * @param mixed $is_active
+     */
+    public function setIsActive($is_active): void
+    {
+        $this->is_active = $is_active;
     }
 }
