@@ -67,4 +67,14 @@ final class MeetupController extends AbstractActionController
 
         return new ViewModel(['form' => $form]);
     }
+
+    /**
+     * @return ViewModel
+     */
+    public function viewAction()
+    {
+        $meetup = $this->meetupRepository->getById($this->params('id'));
+
+        return new ViewModel(['meetup' => $meetup]);
+    }
 }

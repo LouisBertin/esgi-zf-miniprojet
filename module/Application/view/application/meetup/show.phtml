@@ -6,7 +6,7 @@
     <ul>
         <?php foreach ($meetups as $meetup): ?>
             <li>
-                <a href="<?php echo $meetup['id'] ?>"><?php echo $meetup['title'] ?></a>
+                <a href="<?php echo $this->url('meetup/view', ['id' => $meetup['id']]) ?>"><?php echo $meetup['title'] ?></a>
                 <?php echo $meetup['startingDate']->format('d-m-Y') ?>
             </li>
         <?php endforeach; ?>

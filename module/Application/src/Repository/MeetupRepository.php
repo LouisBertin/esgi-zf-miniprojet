@@ -31,6 +31,17 @@ final class MeetupRepository extends EntityRepository
     }
 
     /**
+     * @param int $id
+     * @return null|object
+     */
+    public function getById(int $id)
+    {
+        $meetup = $this->find($id);
+
+        return $meetup;
+    }
+
+    /**
      * @param Meeting $meeting
      * @throws \Doctrine\ORM\ORMException
      * @throws \Doctrine\ORM\OptimisticLockException

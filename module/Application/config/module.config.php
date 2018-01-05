@@ -11,6 +11,7 @@ use Application\Controller\IndexController;
 use Application\Controller\MeetupController;
 use Application\Controller\MeetupControllerFactory;
 use Zend\Router\Http\Literal;
+use Zend\Router\Http\Segment;
 use Zend\ServiceManager\Factory\InvokableFactory;
 use Application\Form\MeetupForm;
 
@@ -47,6 +48,15 @@ return [
                             ),
                         ),
                     ),
+                    'view' => array(
+                        'type' => Segment::class,
+                        'options' => array(
+                            'route' => '/view/:id',
+                            'defaults' => array(
+                                'action' => 'view',
+                            ),
+                        ),
+                    ),
                 ),
             ],
         ],
@@ -67,6 +77,7 @@ return [
             'layout/layout'           => __DIR__ . '/../view/layout/layout.phtml',
             'application/index/index' => __DIR__ . '/../view/application/index/index.phtml',
             'application/meetup/show' => __DIR__ . '/../view/application/meetup/show.phtml',
+            'application/meetup/view' => __DIR__ . '/../view/application/meetup/view.phtml',
             'error/404'               => __DIR__ . '/../view/error/404.phtml',
             'error/index'             => __DIR__ . '/../view/error/index.phtml',
         ],
