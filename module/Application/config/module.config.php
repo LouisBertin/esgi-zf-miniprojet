@@ -12,6 +12,7 @@ use Application\Controller\MeetupController;
 use Application\Controller\MeetupControllerFactory;
 use Zend\Router\Http\Literal;
 use Zend\ServiceManager\Factory\InvokableFactory;
+use Application\Form\MeetupForm;
 
 return [
     'router' => [
@@ -71,6 +72,11 @@ return [
         ],
         'template_path_stack' => [
             __DIR__ . '/../view',
+        ],
+    ],
+    'service_manager' => [
+        'factories' => [
+            MeetupForm::class => InvokableFactory::class,
         ],
     ],
     'doctrine' => [

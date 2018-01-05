@@ -3,7 +3,7 @@
 namespace Application\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
-use Zend\Form\Element\DateTime;
+use DateTime;
 
 /**
  * Class Meeting
@@ -16,8 +16,9 @@ use Zend\Form\Element\DateTime;
 class Meeting
 {
     /**
+     * @ORM\Column(type="string", type="integer", nullable=false, length=50)
      * @ORM\Id
-     * @ORM\Column(type="string", length=50)
+     * @ORM\GeneratedValue(strategy="AUTO")
      **/
     private $id;
 
@@ -42,27 +43,17 @@ class Meeting
     private $endingDate;
 
     /**
-     * @ORM\Column(type="boolean", name="is_active", options={"default" : 1})
+     * @ORM\Column(type="boolean", nullable=false, name="is_active", options={"default":1})
      */
-    private $is_active;
+    private $is_active = 1;
 
-    /**
-     * Meeting constructor.
-     * @param $id
-     * @param $title
-     * @param string $description
-     * @param $startingDate
-     * @param $endingDate
-     * @param $is_active
-     */
-    public function __construct($id, $title, string $description, $startingDate, $endingDate, $is_active)
+
+    public function __construct(string $title, string $description, DateTime $startingDate, DateTime $endingDate)
     {
-        $this->id = $id;
         $this->title = $title;
         $this->description = $description;
         $this->startingDate = $startingDate;
         $this->endingDate = $endingDate;
-        $this->is_active = $is_active;
     }
 
     /**

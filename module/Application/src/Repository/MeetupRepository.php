@@ -2,6 +2,7 @@
 
 namespace Application\Repository;
 
+use Application\Entity\Meeting;
 use Doctrine\ORM\EntityRepository;
 
 /**
@@ -27,5 +28,29 @@ final class MeetupRepository extends EntityRepository
         }
 
         return $results;
+    }
+
+    /**
+     * @param Meeting $meeting
+     * @throws \Doctrine\ORM\ORMException
+     * @throws \Doctrine\ORM\OptimisticLockException
+     */
+    public function add(Meeting $meeting) : void
+    {
+        $this->getEntityManager()->persist($meeting);
+        $this->getEntityManager()->flush();
+    }
+
+    /**
+     * @param string $title
+     * @param string $description
+     * @param string $startingDate
+     * @return Meeting
+     */
+    public function createMeetupFromTitleAndDesc(string $title, string $description, string $startingDate) : Meeting
+    {
+        $startingDate = new \DateTime($startingDate);
+        $endingDate = $startingDate;
+        return new Meeting($title, $description, $startingDate, $endingDate);
     }
 }
