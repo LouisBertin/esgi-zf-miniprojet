@@ -7,7 +7,7 @@ use Application\Repository\MeetupRepository;
 use Zend\Mvc\Controller\AbstractActionController;
 use Zend\View\Model\ViewModel;
 
-class MeetupController extends AbstractActionController
+final class MeetupController extends AbstractActionController
 {
     /** @var MeetupRepository $meetupRepository */
     private $meetupRepository;
@@ -27,7 +27,9 @@ class MeetupController extends AbstractActionController
      */
     public function showAction()
     {
-        return new ViewModel();
+        $meetups = $this->meetupRepository->getMeetup();
+
+        return new ViewModel(['meetups' => $meetups]);
     }
 
     /**
