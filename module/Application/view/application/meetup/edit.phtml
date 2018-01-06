@@ -1,0 +1,17 @@
+<div class="jumbotron">
+    <p>edit</p>
+
+    <?php
+    $form = $this->form; /* @var $form \Zend\Form\Form */
+    ?>
+
+    <?= $this->form()->openTag($form); ?>
+
+    <?= $this->formRow($form->get('title')) ?> <br>
+    <?= $this->formRow($form->get('description')) ?> <br>
+    <?= $this->formRow($form->get('startingDate')) ?> <br>
+    <?= $this->formRow($form->get('endingDate')) ?> <br>
+    <?= $this->formSubmit($form->get('submit')->setValue('Edit')); ?>
+
+    <?= $this->form()->closeTag($form); ?>
+</div>

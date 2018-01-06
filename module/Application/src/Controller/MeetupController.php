@@ -3,6 +3,7 @@
 namespace Application\Controller;
 
 
+use Application\Entity\Meetup;
 use Application\Form\MeetupForm;
 use Application\Repository\MeetupRepository;
 use Zend\Http\PhpEnvironment\Request;
@@ -76,6 +77,34 @@ final class MeetupController extends AbstractActionController
         $meetup = $this->meetupRepository->getById($this->params('id'));
 
         return new ViewModel(['meetup' => $meetup]);
+    }
+
+    /**
+     * @return \Zend\Http\Response|ViewModel
+     * @throws \Doctrine\ORM\ORMException
+     * @throws \Doctrine\ORM\OptimisticLockException
+     */
+    public function editAction()
+    {
+        /** @var Meetup $meetup */
+        $meetup = $this->meetupRepository->getById($this->params('id'));
+        $form = $this->meetupForm;
+        $form->prepare();
+        $form->populateValues($meetup->toArray());
+
+        /** @var Request $request */
+        $request = $this->getRequest();
+        if ($request->isPost()){
+            $form->setData($request->getPost());
+
+            if ($form->isValid()){
+                $this->meetupRepository->edit($this->params('id'), $request->getPost()['title'], $request->getPost()['description'], $request->getPost()['startingDate'], $request->getPost()['endingDate']);
+
+                return $this->redirect()->toRoute('meetup/edit', ['id' => $meetup->getId()]);
+            }
+        }
+
+        return new ViewModel(['form' => $form]);
     }
 
     public function deleteAction()

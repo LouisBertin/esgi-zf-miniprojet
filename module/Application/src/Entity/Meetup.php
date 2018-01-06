@@ -152,4 +152,22 @@ class Meetup
     {
         $this->is_active = $is_active;
     }
+
+    /**
+     * @return array
+     */
+    public function toArray() : array
+    {
+        $array = [];
+
+        foreach ($this as $key => $value){
+            if ($value instanceof DateTime){
+                $array[$key] = $value->format('m/d/Y');
+                continue;
+            }
+            $array[$key] = $value;
+        }
+
+        return $array;
+    }
 }

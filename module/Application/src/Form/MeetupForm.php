@@ -30,12 +30,12 @@ class MeetupForm extends Form implements InputFilterProviderInterface
 
         $startingDate = new Text('startingDate');
         $startingDate->setLabel('Starting Date');
-        $startingDate->setAttribute('data-toggle', 'datepicker');
+        $startingDate->setAttribute('class', 'datepicker');
         $this->add($startingDate);
 
         $endingDate = new Text('endingDate');
         $endingDate->setLabel('Ending Date');
-        $endingDate->setAttribute('data-toggle', 'datepicker');
+        $endingDate->setAttribute('class', 'datepicker');
         $this->add($endingDate);
 
         $submit = new Submit('submit');

@@ -57,6 +57,15 @@ return [
                             ),
                         ),
                     ),
+                    'edit' => array(
+                        'type' => Segment::class,
+                        'options' => array(
+                            'route' => '/edit/:id',
+                            'defaults' => array(
+                                'action' => 'edit',
+                            ),
+                        ),
+                    ),
                     'delete' => array(
                         'type' => Segment::class,
                         'options' => array(
@@ -87,6 +96,7 @@ return [
             'application/index/index' => __DIR__ . '/../view/application/index/index.phtml',
             'application/meetup/show' => __DIR__ . '/../view/application/meetup/show.phtml',
             'application/meetup/view' => __DIR__ . '/../view/application/meetup/view.phtml',
+            'application/meetup/edit' => __DIR__ . '/../view/application/meetup/edit.phtml',
             'error/404'               => __DIR__ . '/../view/error/404.phtml',
             'error/index'             => __DIR__ . '/../view/error/index.phtml',
         ],

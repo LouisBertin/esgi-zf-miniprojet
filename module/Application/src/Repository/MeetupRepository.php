@@ -68,6 +68,28 @@ final class MeetupRepository extends EntityRepository
 
     /**
      * @param int $id
+     * @param string $title
+     * @param string $description
+     * @param string $startingDate
+     * @param string $endingDate
+     * @throws \Doctrine\ORM\ORMException
+     * @throws \Doctrine\ORM\OptimisticLockException
+     */
+    public function edit(int $id, string $title, string $description, string $startingDate, string $endingDate) : void
+    {
+        $em = $this->getEntityManager();
+        $meetup = $this->getById($id);
+
+        $meetup->setTitle($title);
+        $meetup->setDescription($description);
+        $meetup->setStartingDate(\DateTime::createFromFormat('d/m/Y', $startingDate));
+        $meetup->setEndingDate(\DateTime::createFromFormat('d/m/Y', $endingDate));
+
+        $em->flush();
+    }
+
+    /**
+     * @param int $id
      * @throws \Doctrine\ORM\ORMException
      * @throws \Doctrine\ORM\OptimisticLockException
      */

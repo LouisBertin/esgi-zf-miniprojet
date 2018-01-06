@@ -8,6 +8,7 @@
             <li>
                 <a href="<?php echo $this->url('meetup/view', ['id' => $meetup['id']]) ?>"><?php echo $meetup['title'] ?></a>
                 <?php echo $meetup['startingDate']->format('d-m-Y') ?>
+                <a href="<?php echo $this->url('meetup/edit', ['id' => $meetup['id']])?>">edit</a>
                 <a href="<?php echo $this->url('meetup/delete', ['id' => $meetup['id']])?>" style="color: red">delete</a>
             </li>
         <?php endforeach; ?>
