@@ -58,7 +58,7 @@ final class MeetupController extends AbstractActionController
             $form->setData($request->getPost());
 
             if ($form->isValid()){
-                $meetup = $this->meetupRepository->createMeetupFromTitleAndDesc($request->getPost()['title'], $request->getPost()['description'], $request->getPost()['startingDate']);
+                $meetup = $this->meetupRepository->createMeetupFromTitleAndDesc($request->getPost()['title'], $request->getPost()['description'], $request->getPost()['startingDate'], $request->getPost()['endingDate']);
                 $this->meetupRepository->add($meetup);
 
                 return $this->redirect()->toRoute('meetup');

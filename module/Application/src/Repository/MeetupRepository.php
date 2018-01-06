@@ -56,12 +56,13 @@ final class MeetupRepository extends EntityRepository
      * @param string $title
      * @param string $description
      * @param string $startingDate
+     * @param string $endingDate
      * @return Meetup
      */
-    public function createMeetupFromTitleAndDesc(string $title, string $description, string $startingDate) : Meetup
+    public function createMeetupFromTitleAndDesc(string $title, string $description, string $startingDate, string $endingDate) : Meetup
     {
         $startingDate = new \DateTime($startingDate);
-        $endingDate = $startingDate;
+        $endingDate = new \DateTime($endingDate);
         return new Meetup($title, $description, $startingDate, $endingDate);
     }
 
