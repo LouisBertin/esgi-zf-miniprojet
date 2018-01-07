@@ -10,6 +10,10 @@ use Zend\Form\Element\Text;
 use Zend\InputFilter\InputFilterProviderInterface;
 use Zend\Validator\StringLength;
 
+/**
+ * Class MeetupForm
+ * @package Application\Form
+ */
 class MeetupForm extends Form implements InputFilterProviderInterface
 {
     /**
@@ -44,7 +48,10 @@ class MeetupForm extends Form implements InputFilterProviderInterface
         $this->add($submit);
     }
 
-    public function getInputFilterSpecification()
+    /**
+     * @return array
+     */
+    public function getInputFilterSpecification() : array
     {
         return [
             'title' => [

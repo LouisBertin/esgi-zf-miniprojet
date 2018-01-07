@@ -6,6 +6,7 @@ use Application\Entity\Meetup;
 use Application\Form\MeetupForm;
 use Application\Repository\MeetupRepository;
 use Zend\Http\PhpEnvironment\Request;
+use Zend\Http\Response;
 use Zend\Mvc\Controller\AbstractActionController;
 use Zend\View\Model\ViewModel;
 
@@ -35,7 +36,7 @@ final class MeetupController extends AbstractActionController
      * show all meetup
      * @return ViewModel
      */
-    public function showAction()
+    public function showAction() : ViewModel
     {
         $meetups = $this->meetupRepository->getAllActive();
 
@@ -47,7 +48,7 @@ final class MeetupController extends AbstractActionController
      * @throws \Doctrine\ORM\ORMException
      * @throws \Doctrine\ORM\OptimisticLockException
      */
-    public function addAction()
+    public function addAction() : ViewModel
     {
         $form = $this->meetupForm;
         $form->prepare();
@@ -71,7 +72,7 @@ final class MeetupController extends AbstractActionController
     /**
      * @return ViewModel
      */
-    public function viewAction()
+    public function viewAction() : ViewModel
     {
         $meetup = $this->meetupRepository->getById($this->params('id'));
 
@@ -79,11 +80,11 @@ final class MeetupController extends AbstractActionController
     }
 
     /**
-     * @return \Zend\Http\Response|ViewModel
+     * @return ViewModel
      * @throws \Doctrine\ORM\ORMException
      * @throws \Doctrine\ORM\OptimisticLockException
      */
-    public function editAction()
+    public function editAction() : ViewModel
     {
         /** @var Meetup $meetup */
         $meetup = $this->meetupRepository->getById($this->params('id'));
@@ -106,7 +107,12 @@ final class MeetupController extends AbstractActionController
         return new ViewModel(['form' => $form]);
     }
 
-    public function deleteAction()
+    /**
+     * @return Response
+     * @throws \Doctrine\ORM\ORMException
+     * @throws \Doctrine\ORM\OptimisticLockException
+     */
+    public function deleteAction() : Response
     {
         $this->meetupRepository->deleteById($this->params('id'));
 
