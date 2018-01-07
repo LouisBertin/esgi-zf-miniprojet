@@ -160,8 +160,8 @@ class Meetup
     {
         $array = [];
 
-        foreach ($this as $key => $value){
-            if ($value instanceof DateTime){
+        foreach ($this as $key => $value) {
+            if ($value instanceof DateTime) {
                 $array[$key] = $value->format('m/d/Y');
                 continue;
             }

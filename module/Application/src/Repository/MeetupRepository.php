@@ -21,7 +21,7 @@ final class MeetupRepository extends EntityRepository
             $qb
                 ->select(['m.id', 'm.title', 'm.startingDate'])
                 ->where('m.is_active = 1')
-                ->from($this->getEntityName() ,'m');
+                ->from($this->getEntityName(), 'm');
             $results = $qb->getQuery()->getResult();
         } catch (\Exception $e) {
             echo 'Exception reçue : ',  $e->getMessage(), "\n";

@@ -2,7 +2,6 @@
 
 namespace Application\Controller;
 
-
 use Application\Entity\Meetup;
 use Application\Form\MeetupForm;
 use Application\Repository\MeetupRepository;
@@ -55,10 +54,10 @@ final class MeetupController extends AbstractActionController
 
         /** @var Request $request */
         $request = $this->getRequest();
-        if ($request->isPost()){
+        if ($request->isPost()) {
             $form->setData($request->getPost());
 
-            if ($form->isValid()){
+            if ($form->isValid()) {
                 $meetup = $this->meetupRepository->createMeetupFromTitleAndDesc($request->getPost()['title'], $request->getPost()['description'], $request->getPost()['startingDate'], $request->getPost()['endingDate']);
                 $this->meetupRepository->add($meetup);
 
@@ -94,10 +93,10 @@ final class MeetupController extends AbstractActionController
 
         /** @var Request $request */
         $request = $this->getRequest();
-        if ($request->isPost()){
+        if ($request->isPost()) {
             $form->setData($request->getPost());
 
-            if ($form->isValid()){
+            if ($form->isValid()) {
                 $this->meetupRepository->edit($this->params('id'), $request->getPost()['title'], $request->getPost()['description'], $request->getPost()['startingDate'], $request->getPost()['endingDate']);
 
                 return $this->redirect()->toRoute('meetup/edit', ['id' => $meetup->getId()]);

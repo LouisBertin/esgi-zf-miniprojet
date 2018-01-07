@@ -82,7 +82,7 @@ class DateCompare extends AbstractValidator
      */
     private function compareDate($expr1, $operator, $expr2) : bool
     {
-        switch(strtolower($operator)) {
+        switch (strtolower($operator)) {
             case '==':
                 return $expr1 == $expr2;
             case '>=':

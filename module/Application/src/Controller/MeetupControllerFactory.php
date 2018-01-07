@@ -2,7 +2,6 @@
 
 namespace Application\Controller;
 
-
 use Application\Entity\Meetup;
 use Psr\Container\ContainerInterface;
 use Doctrine\ORM\EntityManager;
