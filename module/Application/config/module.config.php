@@ -8,8 +8,10 @@
 namespace Application;
 
 use Application\Controller\IndexController;
+use Application\Controller\IndexControllerFactory;
 use Application\Controller\MeetupController;
 use Application\Controller\MeetupControllerFactory;
+use Application\Form\ContactForm;
 use Zend\Router\Http\Literal;
 use Zend\Router\Http\Segment;
 use Zend\ServiceManager\Factory\InvokableFactory;
@@ -77,11 +79,21 @@ return [
                     ),
                 ),
             ],
+            'contact' => [
+                'type' => Literal::class,
+                'options' => [
+                    'route'    => '/contact',
+                    'defaults' => [
+                        'controller' => IndexController::class,
+                        'action'     => 'contact',
+                    ],
+                ],
+            ]
         ],
     ],
     'controllers' => [
         'factories' => [
-            IndexController::class => InvokableFactory::class,
+            IndexController::class => IndexControllerFactory::class,
             MeetupController::class => MeetupControllerFactory::class,
         ],
     ],
@@ -94,6 +106,7 @@ return [
         'template_map' => [
             'layout/layout'           => __DIR__ . '/../view/layout/layout.phtml',
             'application/index/index' => __DIR__ . '/../view/application/index/index.phtml',
+            'application/index/contact' => __DIR__ . '/../view/application/index/contact.phtml',
             'application/meetup/show' => __DIR__ . '/../view/application/meetup/show.phtml',
             'application/meetup/view' => __DIR__ . '/../view/application/meetup/view.phtml',
             'application/meetup/edit' => __DIR__ . '/../view/application/meetup/edit.phtml',
@@ -107,6 +120,7 @@ return [
     'service_manager' => [
         'factories' => [
             MeetupForm::class => InvokableFactory::class,
+            ContactForm::class => InvokableFactory::class
         ],
     ],
     'doctrine' => [

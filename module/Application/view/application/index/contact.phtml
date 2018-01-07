@@ -1,0 +1,17 @@
+<div class="jumbotron">
+    <p>contact form</p>
+
+    <?php
+    $form = $this->form; /* @var $form \Zend\Form\Form */
+    ?>
+
+    <?= $this->form()->openTag($form); ?>
+
+    <?= $this->formRow($form->get('lastname')) ?> <br>
+    <?= $this->formRow($form->get('firstname')) ?> <br>
+    <?= $this->formRow($form->get('email')) ?> <br>
+    <?= $this->formRow($form->get('message')) ?> <br>
+    <?= $this->formRow($form->get('submit')) ?> <br>
+
+    <?= $this->form()->closeTag($form); ?>
+</div>
