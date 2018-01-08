@@ -12,6 +12,8 @@ use Application\Controller\IndexControllerFactory;
 use Application\Controller\MeetupController;
 use Application\Controller\MeetupControllerFactory;
 use Application\Form\ContactForm;
+use Application\Helper\MeetupImg;
+use Application\Helper\MeetupImgFactory;
 use Zend\Router\Http\Literal;
 use Zend\Router\Http\Segment;
 use Zend\ServiceManager\Factory\InvokableFactory;
@@ -122,6 +124,15 @@ return [
             MeetupForm::class => InvokableFactory::class,
             ContactForm::class => InvokableFactory::class
         ],
+    ],
+    'upload_path' => 'public/img/meetup/',
+    'view_helpers' => [
+        'factories' => [
+            MeetupImg::class => MeetupImgFactory::class
+        ],
+        'aliases' => [
+            'meetupImg' => MeetupImg::class
+        ]
     ],
     'doctrine' => [
         'driver' => [

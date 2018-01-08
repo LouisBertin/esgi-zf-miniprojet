@@ -1,4 +1,5 @@
 <div class="jumbotron">
     <p> <?php echo $meetup->getTitle() ?></p>
     <p><?php echo $meetup->getDescription() ?></p>
+    <img src="<?php echo $this->meetupImg($meetup->getImg())?>" alt="" width="100%">
 </div>
