@@ -18,18 +18,22 @@ final class MeetupController extends AbstractActionController
 {
     /** @var MeetupRepository $meetupRepository */
     private $meetupRepository;
-    /** @var $meetupForm */
+    /** @var MeetupForm $meetupForm */
     private $meetupForm;
+    /** @var string $upload_path */
+    private $upload_path;
 
     /**
      * MeetupController constructor.
      * @param MeetupRepository $meetupRepository
      * @param MeetupForm $meetupForm
+     * @param string $upload_path
      */
-    public function __construct(MeetupRepository $meetupRepository, MeetupForm $meetupForm)
+    public function __construct(MeetupRepository $meetupRepository, MeetupForm $meetupForm, string $upload_path)
     {
         $this->meetupRepository = $meetupRepository;
         $this->meetupForm = $meetupForm;
+        $this->upload_path = $upload_path;
     }
 
     /**
@@ -47,8 +51,9 @@ final class MeetupController extends AbstractActionController
      * @return ViewModel
      * @throws \Doctrine\ORM\ORMException
      * @throws \Doctrine\ORM\OptimisticLockException
+     * @throws \Exception
      */
-    public function addAction() : ViewModel
+    public function addAction() : object
     {
         $form = $this->meetupForm;
         $form->prepare();
@@ -56,10 +61,24 @@ final class MeetupController extends AbstractActionController
         /** @var Request $request */
         $request = $this->getRequest();
         if ($request->isPost()) {
-            $form->setData($request->getPost());
+            $data = array_merge_recursive(
+                $request->getPost()->toArray(),
+                $request->getFiles()->toArray()
+            );
+            $form->setData($data);
 
             if ($form->isValid()) {
-                $meetup = $this->meetupRepository->createMeetupFromTitleAndDesc($request->getPost()['title'], $request->getPost()['description'], $request->getPost()['startingDate'], $request->getPost()['endingDate']);
+                $extension = explode('.', $data['img']['name']);
+                $extension = end($extension);
+                $fileName = time() . '.' . $extension;
+
+                if ($data['img']['error'] === 0) {
+                    move_uploaded_file($data['img']['tmp_name'], $this->upload_path . $fileName);
+                } else {
+                    throw new \Exception('unknown error with img');
+                }
+
+                $meetup = $this->meetupRepository->create($data['title'], $data['description'], $data['startingDate'], $data['endingDate'], $fileName);
                 $this->meetupRepository->add($meetup);
 
                 return $this->redirect()->toRoute('meetup');

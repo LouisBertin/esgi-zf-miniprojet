@@ -43,17 +43,30 @@ class Meetup
     private $endingDate;
 
     /**
+     * @ORM\Column(type="string", name="img")
+     */
+    private $img;
+
+    /**
      * @ORM\Column(type="boolean", nullable=false, name="is_active", options={"default":1})
      */
     private $is_active = 1;
 
-
-    public function __construct(string $title, string $description, DateTime $startingDate, DateTime $endingDate)
+    /**
+     * Meetup constructor.
+     * @param string $title
+     * @param string $description
+     * @param DateTime $startingDate
+     * @param DateTime $endingDate
+     * @param string $img
+     */
+    public function __construct(string $title, string $description, DateTime $startingDate, DateTime $endingDate, string $img)
     {
         $this->title = $title;
         $this->description = $description;
         $this->startingDate = $startingDate;
         $this->endingDate = $endingDate;
+        $this->img = $img;
     }
 
     /**
@@ -151,6 +164,22 @@ class Meetup
     public function setIsActive($is_active): void
     {
         $this->is_active = $is_active;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getImg()
+    {
+        return $this->img;
+    }
+
+    /**
+     * @param mixed $img
+     */
+    public function setImg($img): void
+    {
+        $this->img = $img;
     }
 
     /**
