@@ -46,14 +46,14 @@ class IndexController extends AbstractActionController
             $form->setData($request->getPost());
 
             if ($form->isValid()) {
-              $message = new Message();
-              $message->addFrom($request->getPost()['email'], $request->getPost()['lastname'].' '.$request->getPost()['firstname']);
-              $message->addTo('bertin.louis7@gmail.com');
-              $message->setSubject('Sending an email from Zend\Mail!');
-              $message->setBody('This is the message body.');
+                $message = new Message();
+                $message->addFrom($request->getPost()['email'], $request->getPost()['lastname'].' '.$request->getPost()['firstname']);
+                $message->addTo('bertin.louis7@gmail.com');
+                $message->setSubject('Sending an email from Zend\Mail!');
+                $message->setBody('This is the message body.');
 
-              $transport = new SendmailTransport();
-              $transport->send($message);
+                $transport = new SendmailTransport();
+                $transport->send($message);
             }
         }
 
