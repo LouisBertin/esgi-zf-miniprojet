@@ -11,8 +11,11 @@ use Application\Controller\IndexController;
 use Application\Controller\IndexControllerFactory;
 use Application\Controller\MeetupController;
 use Application\Controller\MeetupControllerFactory;
+use Application\Controller\OrganizerController;
+use Application\Controller\OrganizerControllerFactory;
 use Application\Form\ContactForm;
 use Application\Form\MeetupEditForm;
+use Application\Form\OrganizerForm;
 use Application\Helper\MeetupImg;
 use Application\Helper\MeetupImgFactory;
 use Zend\Router\Http\Literal;
@@ -82,6 +85,27 @@ return [
                     ),
                 ),
             ],
+            'organizer' => [
+                'type' => Literal::class,
+                'options' => [
+                    'route'    => '/organizer',
+                    'defaults' => [
+                        'controller' => OrganizerController::class,
+                    ],
+                ],
+                'may_terminate' => true,
+                'child_routes' => array(
+                    'add' => array(
+                        'type' => 'literal',
+                        'options' => array(
+                            'route' => '/add',
+                            'defaults' => array(
+                                'action' => 'add',
+                            ),
+                        ),
+                    ),
+                ),
+            ],
             'contact' => [
                 'type' => Literal::class,
                 'options' => [
@@ -98,6 +122,7 @@ return [
         'factories' => [
             IndexController::class => IndexControllerFactory::class,
             MeetupController::class => MeetupControllerFactory::class,
+            OrganizerController::class => OrganizerControllerFactory::class
         ],
     ],
     'view_manager' => [
@@ -113,6 +138,7 @@ return [
             'application/meetup/show' => __DIR__ . '/../view/application/meetup/show.phtml',
             'application/meetup/view' => __DIR__ . '/../view/application/meetup/view.phtml',
             'application/meetup/edit' => __DIR__ . '/../view/application/meetup/edit.phtml',
+            'application/organizer/add' => __DIR__ . '/../view/application/organizer/add.phtml',
             'error/404'               => __DIR__ . '/../view/error/404.phtml',
             'error/index'             => __DIR__ . '/../view/error/index.phtml',
         ],
@@ -124,7 +150,8 @@ return [
         'factories' => [
             MeetupForm::class => InvokableFactory::class,
             MeetupEditForm::class => InvokableFactory::class,
-            ContactForm::class => InvokableFactory::class
+            ContactForm::class => InvokableFactory::class,
+            OrganizerForm::class => InvokableFactory::class
         ],
     ],
     'upload_path' => 'public/img/meetup/',

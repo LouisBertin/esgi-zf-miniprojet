@@ -2,6 +2,7 @@
 
 namespace Application\Entity;
 
+use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 use DateTime;
 
@@ -53,20 +54,32 @@ class Meetup
     private $is_active = 1;
 
     /**
+     * Many Meetup have Many Organizer.
+     * @ORM\ManyToMany(targetEntity="Organizer")
+     * @ORM\JoinTable(name="meetup_organizer",
+     *      joinColumns={@ORM\JoinColumn(name="meetup_id", referencedColumnName="id")},
+     *      inverseJoinColumns={@ORM\JoinColumn(name="organizer_id", referencedColumnName="id")}
+     *      )
+     */
+    private $organizer;
+
+    /**
      * Meetup constructor.
      * @param string $title
      * @param string $description
      * @param DateTime $startingDate
      * @param DateTime $endingDate
      * @param string $img
+     * @param ArrayCollection $organizer
      */
-    public function __construct(string $title, string $description, DateTime $startingDate, DateTime $endingDate, string $img)
+    public function __construct(string $title, string $description, DateTime $startingDate, DateTime $endingDate, string $img, ArrayCollection $organizer)
     {
         $this->title = $title;
         $this->description = $description;
         $this->startingDate = $startingDate;
         $this->endingDate = $endingDate;
         $this->img = $img;
+        $this->$organizer = new ArrayCollection();
     }
 
     /**
@@ -180,6 +193,22 @@ class Meetup
     public function setImg($img): void
     {
         $this->img = $img;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getOrganizer()
+    {
+        return $this->organizer;
+    }
+
+    /**
+     * @param mixed $organizer
+     */
+    public function setOrganizer($organizer)
+    {
+        $this->organizer = $organizer;
     }
 
     /**
