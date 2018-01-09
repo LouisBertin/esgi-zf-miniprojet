@@ -8,7 +8,9 @@
 
 namespace Application\Controller;
 
+use Application\Entity\Meetup;
 use Application\Form\ContactForm;
+use Doctrine\ORM\EntityManager;
 use Psr\Container\ContainerInterface;
 
 /**
@@ -27,7 +29,11 @@ final class IndexControllerFactory
     {
         /** @var ContactForm $contactForm */
         $contactForm = $container->get(ContactForm::class);
+        /** @var EntityManager $em */
+        $em = $container->get(EntityManager::class);
+        /** @var Meetup $meetupRepository */
+        $meetupRepository = $em->getRepository(Meetup::class);
 
-        return new IndexController($contactForm);
+        return new IndexController($contactForm, $meetupRepository);
     }
 }

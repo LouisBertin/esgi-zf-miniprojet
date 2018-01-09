@@ -15,10 +15,10 @@ use Zend\Validator\File\IsImage;
 use Zend\Validator\StringLength;
 
 /**
- * Class MeetupForm
+ * Class MeetupEditForm
  * @package Application\Form
  */
-class MeetupForm extends Form implements InputFilterProviderInterface
+class MeetupEditForm extends Form implements InputFilterProviderInterface
 {
     /**
      * MeetupForm constructor.
@@ -99,6 +99,7 @@ class MeetupForm extends Form implements InputFilterProviderInterface
                 ]
             ],
             'img' => [
+                'required' => false,
                 'validators' => [
                     [
                         'name' => ImageSize::class,

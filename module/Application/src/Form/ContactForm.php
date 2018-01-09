@@ -27,18 +27,22 @@ class ContactForm extends Form implements InputFilterProviderInterface
 
         $lastname = new Text('lastname');
         $lastname->setLabel('Lastname');
+        $lastname->setAttribute('class', 'form-control');
         $this->add($lastname);
 
         $firstname = new Text('firstname');
         $firstname->setLabel('Firstname');
+        $firstname->setAttribute('class', 'form-control');
         $this->add($firstname);
 
         $email = new Email('email');
         $email->setLabel('Email');
+        $email->setAttribute('class', 'form-control');
         $this->add($email);
 
         $message = new Textarea('message');
         $message->setLabel('Message');
+        $message->setAttribute('class', 'form-control');
         $this->add($message);
 
         $submit = new Submit('submit');

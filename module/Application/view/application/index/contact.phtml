@@ -1,17 +1,47 @@
-<div class="jumbotron">
-    <p>contact form</p>
+<h3>Contact form</h3><br>
 
-    <?php
+<?php
     $form = $this->form; /* @var $form \Zend\Form\Form */
     ?>
 
     <?= $this->form()->openTag($form); ?>
 
-    <?= $this->formRow($form->get('lastname')) ?> <br>
-    <?= $this->formRow($form->get('firstname')) ?> <br>
-    <?= $this->formRow($form->get('email')) ?> <br>
-    <?= $this->formRow($form->get('message')) ?> <br>
+    <div class="form-group">
+        <?php
+        $lastname = $form->get('lastname');
+        echo $this->formLabel($lastname);
+        echo $this->formText($lastname);
+        echo $this->formElementErrors($lastname);
+        ?>
+    </div>
+
+    <div class="form-group">
+        <?php
+        $firstname = $form->get('firstname');
+        echo $this->formLabel($firstname);
+        echo $this->formText($firstname);
+        echo $this->formElementErrors($firstname);
+        ?>
+    </div>
+
+    <div class="form-group">
+        <?php
+        $email = $form->get('email');
+        echo $this->formLabel($email);
+        echo $this->formEmail($email);
+        echo $this->formElementErrors($email);
+        ?>
+    </div>
+
+    <div class="form-group">
+        <?php
+        $message = $form->get('message');
+        echo $this->formLabel($message);
+        echo $this->formTextarea($message);
+        echo $this->formElementErrors($message);
+        ?>
+    </div>
+
     <?= $this->formRow($form->get('submit')) ?> <br>
 
     <?= $this->form()->closeTag($form); ?>
-</div>

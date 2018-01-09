@@ -3,6 +3,7 @@
 namespace Application\Controller;
 
 use Application\Entity\Meetup;
+use Application\Form\MeetupEditForm;
 use Psr\Container\ContainerInterface;
 use Doctrine\ORM\EntityManager;
 use Application\Form\MeetupForm;
@@ -26,9 +27,11 @@ final class MeetupControllerFactory
         $meetupRepository = $em->getRepository(Meetup::class);
         /** @var MeetupForm $meetupForm */
         $meetupForm = $container->get(MeetupForm::class);
+        /** @var $meetupEditForm $meetupEditForm */
+        $meetupEditForm = $container->get(MeetupEditForm::class);
         /** @var string $upload_path */
         $upload_path = $container->get('config')['upload_path'];
 
-        return new MeetupController($meetupRepository, $meetupForm, $upload_path);
+        return new MeetupController($meetupRepository, $meetupForm, $meetupEditForm, $upload_path);
     }
 }

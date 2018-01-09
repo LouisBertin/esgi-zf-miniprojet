@@ -3,6 +3,7 @@
 namespace Application\Controller;
 
 use Application\Entity\Meetup;
+use Application\Form\MeetupEditForm;
 use Application\Form\MeetupForm;
 use Application\Repository\MeetupRepository;
 use Zend\Http\PhpEnvironment\Request;
@@ -20,6 +21,8 @@ final class MeetupController extends AbstractActionController
     private $meetupRepository;
     /** @var MeetupForm $meetupForm */
     private $meetupForm;
+    /** @var MeetupEditForm $meetupEdit */
+    private $meetupEditForm;
     /** @var string $upload_path */
     private $upload_path;
 
@@ -27,12 +30,14 @@ final class MeetupController extends AbstractActionController
      * MeetupController constructor.
      * @param MeetupRepository $meetupRepository
      * @param MeetupForm $meetupForm
+     * @param MeetupEditForm $meetupEditForm
      * @param string $upload_path
      */
-    public function __construct(MeetupRepository $meetupRepository, MeetupForm $meetupForm, string $upload_path)
+    public function __construct(MeetupRepository $meetupRepository, MeetupForm $meetupForm, MeetupEditForm $meetupEditForm, string $upload_path)
     {
         $this->meetupRepository = $meetupRepository;
         $this->meetupForm = $meetupForm;
+        $this->meetupEditForm = $meetupEditForm;
         $this->upload_path = $upload_path;
     }
 
@@ -107,17 +112,31 @@ final class MeetupController extends AbstractActionController
     {
         /** @var Meetup $meetup */
         $meetup = $this->meetupRepository->getById($this->params('id'));
-        $form = $this->meetupForm;
+        $form = $this->meetupEditForm;
         $form->prepare();
         $form->populateValues($meetup->toArray());
 
         /** @var Request $request */
         $request = $this->getRequest();
         if ($request->isPost()) {
+            $data = array_merge_recursive(
+                $request->getPost()->toArray(),
+                $request->getFiles()->toArray()
+            );
             $form->setData($request->getPost());
 
             if ($form->isValid()) {
-                $this->meetupRepository->edit($this->params('id'), $request->getPost()['title'], $request->getPost()['description'], $request->getPost()['startingDate'], $request->getPost()['endingDate']);
+                $extension = explode('.', $data['img']['name']);
+                $extension = end($extension);
+                $fileName = time() . '.' . $extension;
+
+                if ($data['img']['error'] === 0) {
+                    move_uploaded_file($data['img']['tmp_name'], $this->upload_path . $fileName);
+                } else {
+                    throw new \Exception('unknown error with img');
+                }
+
+                $this->meetupRepository->edit($this->params('id'), $data['title'], $data['description'], $data['startingDate'], $data['endingDate'], $fileName);
 
                 return $this->redirect()->toRoute('meetup/edit', ['id' => $meetup->getId()]);
             }

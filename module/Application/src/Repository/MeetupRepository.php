@@ -19,7 +19,7 @@ final class MeetupRepository extends EntityRepository
         try {
             $qb = $this->getEntityManager()->createQueryBuilder();
             $qb
-                ->select(['m.id', 'm.title', 'm.startingDate'])
+                ->select(['m.id', 'm.title', 'm.startingDate', 'm.img'])
                 ->where('m.is_active = 1')
                 ->from($this->getEntityName(), 'm');
             $results = $qb->getQuery()->getResult();
@@ -32,11 +32,23 @@ final class MeetupRepository extends EntityRepository
 
     /**
      * @param int $id
-     * @return null|object
+     * @return Meetup
      */
-    public function getById(int $id)
+    public function getById(int $id) : Meetup
     {
         $meetup = $this->find($id);
+
+        return $meetup;
+    }
+
+    /**
+     * @param string $key
+     * @param string $value
+     * @return Meetup
+     */
+    public function getBy(string $key, string $value) : Meetup
+    {
+        $meetup = $this->findOneBy([],[$key => $value]);
 
         return $meetup;
     }
@@ -76,7 +88,7 @@ final class MeetupRepository extends EntityRepository
      * @throws \Doctrine\ORM\ORMException
      * @throws \Doctrine\ORM\OptimisticLockException
      */
-    public function edit(int $id, string $title, string $description, string $startingDate, string $endingDate) : void
+    public function edit(int $id, string $title, string $description, string $startingDate, string $endingDate, $fileName) : void
     {
         $em = $this->getEntityManager();
         $meetup = $this->getById($id);
@@ -85,6 +97,7 @@ final class MeetupRepository extends EntityRepository
         $meetup->setDescription($description);
         $meetup->setStartingDate(\DateTime::createFromFormat('d/m/Y', $startingDate));
         $meetup->setEndingDate(\DateTime::createFromFormat('d/m/Y', $endingDate));
+        $meetup->setImg($fileName);
 
         $em->flush();
     }

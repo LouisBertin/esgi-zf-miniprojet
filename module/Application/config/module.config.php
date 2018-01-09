@@ -12,6 +12,7 @@ use Application\Controller\IndexControllerFactory;
 use Application\Controller\MeetupController;
 use Application\Controller\MeetupControllerFactory;
 use Application\Form\ContactForm;
+use Application\Form\MeetupEditForm;
 use Application\Helper\MeetupImg;
 use Application\Helper\MeetupImgFactory;
 use Zend\Router\Http\Literal;
@@ -122,6 +123,7 @@ return [
     'service_manager' => [
         'factories' => [
             MeetupForm::class => InvokableFactory::class,
+            MeetupEditForm::class => InvokableFactory::class,
             ContactForm::class => InvokableFactory::class
         ],
     ],

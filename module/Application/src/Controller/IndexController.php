@@ -8,6 +8,7 @@
 namespace Application\Controller;
 
 use Application\Form\ContactForm;
+use Application\Repository\MeetupRepository;
 use Zend\Http\PhpEnvironment\Request;
 use Zend\Mail\Message;
 use Zend\Mvc\Controller\AbstractActionController;
@@ -18,10 +19,13 @@ class IndexController extends AbstractActionController
 {
     /** @var ContactForm */
     private $contactForm;
+    /** @var MeetupRepository */
+    private $meetupRepository;
 
-    public function __construct(ContactForm $contactForm)
+    public function __construct(ContactForm $contactForm, MeetupRepository $meetupRepository)
     {
         $this->contactForm = $contactForm;
+        $this->meetupRepository = $meetupRepository;
     }
 
     /**
@@ -29,7 +33,13 @@ class IndexController extends AbstractActionController
      */
     public function indexAction() : ViewModel
     {
-        return new ViewModel();
+        $newMeetup = $this->meetupRepository->getBy('id', 'DESC');
+        $nextMeetup = $this->meetupRepository->getBy('startingDate', 'ASC');
+
+        return new ViewModel([
+            'newMeetup' => $newMeetup,
+            'nextMeetup' => $nextMeetup
+        ]);
     }
 
     /**

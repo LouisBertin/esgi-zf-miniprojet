@@ -1,17 +1,56 @@
-<div class="jumbotron">
-    <p>edit</p>
+<h3>edit</h3>
 
+<?php
+$form = $this->form; /* @var $form \Zend\Form\Form */
+?>
+
+<?= $this->form()->openTag($form); ?>
+
+<div class="form-group">
     <?php
-    $form = $this->form; /* @var $form \Zend\Form\Form */
+    $title = $form->get('title');
+    echo $this->formLabel($title);
+    echo $this->formText($title);
+    echo $this->formElementErrors($title);
     ?>
-
-    <?= $this->form()->openTag($form); ?>
-
-    <?= $this->formRow($form->get('title')) ?> <br>
-    <?= $this->formRow($form->get('description')) ?> <br>
-    <?= $this->formRow($form->get('startingDate')) ?> <br>
-    <?= $this->formRow($form->get('endingDate')) ?> <br>
-    <?= $this->formSubmit($form->get('submit')->setValue('Edit')); ?>
-
-    <?= $this->form()->closeTag($form); ?>
 </div>
+
+<div class="form-group">
+    <?php
+    $description = $form->get('description');
+    echo $this->formLabel($description);
+    echo $this->formTextArea($description);
+    echo $this->formElementErrors($description);
+    ?>
+</div>
+
+<div class="form-group">
+    <?php
+    $startingDate = $form->get('startingDate');
+    echo $this->formLabel($startingDate);
+    echo $this->formText($startingDate);
+    echo $this->formElementErrors($startingDate);
+    ?>
+</div>
+
+<div class="form-group">
+    <?php
+    $endingDate = $form->get('endingDate');
+    echo $this->formLabel($endingDate);
+    echo $this->formText($endingDate);
+    echo $this->formElementErrors($endingDate);
+    ?>
+</div>
+
+<div class="form-group">
+    <?php
+    $img = $form->get('img');
+    echo $this->formLabel($img);
+    echo $this->formFile($img);
+    echo $this->formElementErrors($img);
+    ?>
+</div>
+
+<?= $this->formSubmit($form->get('submit')->setValue('Edit')); ?>
+
+<?= $this->form()->closeTag($form); ?>
