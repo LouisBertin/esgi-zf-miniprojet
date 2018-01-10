@@ -6,6 +6,7 @@ use Application\Entity\Organizer;
 use Application\Form\OrganizerForm;
 use Application\Repository\OrganizerRepository;
 use Zend\Http\PhpEnvironment\Request;
+use Zend\Http\Response;
 use Zend\Mvc\Controller\AbstractActionController;
 use Zend\View\Model\ViewModel;
 
@@ -56,5 +57,28 @@ class OrganizerController extends AbstractActionController
         }
 
         return new ViewModel(['form' => $form]);
+    }
+
+    /**
+     * @return ViewModel
+     */
+    public function showAction() : ViewModel
+    {
+        /** @var array $organizers */
+        $organizers = $this->organizerRepository->findAll();
+
+        return new ViewModel(['organizers' => $organizers]);
+    }
+
+    /**
+     * @return Response
+     * @throws \Doctrine\ORM\ORMException
+     * @throws \Doctrine\ORM\OptimisticLockException
+     */
+    public function deleteAction() : Response
+    {
+        $this->organizerRepository->deleteById($this->params('id'));
+
+        return $this->redirect()->toRoute('organizer/show');
     }
 }

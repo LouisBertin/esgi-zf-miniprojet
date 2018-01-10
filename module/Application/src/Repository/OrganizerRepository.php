@@ -53,10 +53,23 @@ final class OrganizerRepository extends EntityRepository
                 ->select(['o.id', 'o.lastname'])
                 ->from($this->getEntityName(), 'o');
             $results = $qb->getQuery()->getResult();
-            } catch (\Exception $e) {
+        } catch (\Exception $e) {
             echo 'Exception reçue : ',  $e->getMessage(), "\n";
         }
 
         return $results;
+    }
+
+    /**
+     * @param int $id
+     * @throws \Doctrine\ORM\ORMException
+     * @throws \Doctrine\ORM\OptimisticLockException
+     */
+    public function deleteById(int $id) : void
+    {
+        $organizer = $this->find($id);
+
+        $this->getEntityManager()->remove($organizer);
+        $this->getEntityManager()->flush();
     }
 }

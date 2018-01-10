@@ -50,7 +50,7 @@ final class MeetupRepository extends EntityRepository
      */
     public function getBy(string $key, string $value) : Meetup
     {
-        $meetup = $this->findOneBy([],[$key => $value]);
+        $meetup = $this->findOneBy([], [$key => $value]);
 
         return $meetup;
     }

@@ -1,6 +1,7 @@
 <?php
 
 namespace Application\Controller;
+
 use Application\Entity\Organizer;
 use Application\Form\OrganizerForm;
 use Application\Repository\OrganizerRepository;

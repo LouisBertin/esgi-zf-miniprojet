@@ -1,0 +1,13 @@
+<h3>all organizers</h3><br>
+<u><a class="pull-right" style="text-decoration: underline" href="<?= $this->url('organizer/add') ?>">add organizer</a></u>
+
+<ul>
+    <?php foreach ($organizers as $organizer): ?>
+        <li>
+            <?php echo $organizer->getLastName() ?> <?php echo $organizer->getFirstName() ?>
+            <a onclick="if (confirm('Are you sure ? it\'s gonna delete organizer\'s meetup(s)')) { document.location = this.href; } return false;" href="<?php echo $this->url('organizer/delete', ['id' => $organizer->getId()])?>" style="color: red">
+                <small>delete</small>
+            </a>
+        </li>
+    <?php endforeach; ?>
+</ul>

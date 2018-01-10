@@ -106,6 +106,24 @@ return [
                             ),
                         ),
                     ),
+                    'show' => array(
+                        'type' => 'literal',
+                        'options' => array(
+                            'route' => '/show',
+                            'defaults' => array(
+                                'action' => 'show',
+                            ),
+                        ),
+                    ),
+                    'delete' => array(
+                        'type' => 'segment',
+                        'options' => array(
+                            'route' => '/delete/:id',
+                            'defaults' => array(
+                                'action' => 'delete',
+                            ),
+                        ),
+                    ),
                 ),
             ],
             'contact' => [
@@ -141,6 +159,7 @@ return [
             'application/meetup/view' => __DIR__ . '/../view/application/meetup/view.phtml',
             'application/meetup/edit' => __DIR__ . '/../view/application/meetup/edit.phtml',
             'application/organizer/add' => __DIR__ . '/../view/application/organizer/add.phtml',
+            'application/organizer/show' => __DIR__ . '/../view/application/organizer/show.phtml',
             'error/404'               => __DIR__ . '/../view/error/404.phtml',
             'error/index'             => __DIR__ . '/../view/error/index.phtml',
         ],

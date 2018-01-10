@@ -1,6 +1,7 @@
 <?php
 
 namespace Application\Form;
+
 use Application\Entity\Organizer;
 use Application\Repository\OrganizerRepository;
 use Doctrine\ORM\EntityManager;

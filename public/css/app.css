@@ -26,3 +26,20 @@ header{
 .meetup-block > .content {
     padding: 10px;
 }
+
+.meetup-view {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 20px;
+}
+
+.meetup-view h3{
+    display: inline-block;
+    margin: 0;
+}
+
+.meetup-view p {
+    display: inline-block;
+    margin: 0;
+    align-items: center;
+}

@@ -36,7 +36,7 @@ class Organizer
 
     /**
      * One Product has Many Features.
-     * @ORM\OneToMany(targetEntity="Meetup", mappedBy="organizer")
+     * @ORM\OneToMany(targetEntity="Meetup", mappedBy="organizer", cascade={"remove"})
      */
     private $meetup;
 
@@ -115,5 +115,21 @@ class Organizer
     public function setEmail($email): void
     {
         $this->email = $email;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getMeetup()
+    {
+        return $this->meetup;
+    }
+
+    /**
+     * @param mixed $meetup
+     */
+    public function setMeetup($meetup)
+    {
+        $this->meetup = $meetup;
     }
 }

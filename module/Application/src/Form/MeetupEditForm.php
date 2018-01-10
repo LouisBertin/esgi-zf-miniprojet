@@ -80,7 +80,7 @@ class MeetupEditForm extends Form implements InputFilterProviderInterface
     {
         $organizers = $this->organizerRepository->getAll();
         $results = [];
-        foreach ($organizers as $value){
+        foreach ($organizers as $value) {
             $results[$value['id']] = $value['lastname'];
         }
 
