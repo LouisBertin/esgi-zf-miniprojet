@@ -54,12 +54,9 @@ class Meetup
     private $is_active = 1;
 
     /**
-     * Many Meetup have Many Organizer.
-     * @ORM\ManyToMany(targetEntity="Organizer")
-     * @ORM\JoinTable(name="meetup_organizer",
-     *      joinColumns={@ORM\JoinColumn(name="meetup_id", referencedColumnName="id")},
-     *      inverseJoinColumns={@ORM\JoinColumn(name="organizer_id", referencedColumnName="id")}
-     *      )
+     * Many Features have One Product.
+     * @ORM\ManyToOne(targetEntity="Organizer", inversedBy="meetup")
+     * @ORM\JoinColumn(name="organizer_id", referencedColumnName="id")
      */
     private $organizer;
 
@@ -70,16 +67,15 @@ class Meetup
      * @param DateTime $startingDate
      * @param DateTime $endingDate
      * @param string $img
-     * @param ArrayCollection $organizer
      */
-    public function __construct(string $title, string $description, DateTime $startingDate, DateTime $endingDate, string $img, ArrayCollection $organizer)
+    public function __construct(string $title, string $description, DateTime $startingDate, DateTime $endingDate, string $img)
     {
         $this->title = $title;
         $this->description = $description;
         $this->startingDate = $startingDate;
         $this->endingDate = $endingDate;
         $this->img = $img;
-        $this->$organizer = new ArrayCollection();
+        $this->organizer = new ArrayCollection();
     }
 
     /**
@@ -196,7 +192,7 @@ class Meetup
     }
 
     /**
-     * @return mixed
+     * @return ArrayCollection
      */
     public function getOrganizer()
     {
@@ -204,9 +200,9 @@ class Meetup
     }
 
     /**
-     * @param mixed $organizer
+     * @param Organizer $organizer
      */
-    public function setOrganizer($organizer)
+    public function addOrganizer(Organizer $organizer)
     {
         $this->organizer = $organizer;
     }

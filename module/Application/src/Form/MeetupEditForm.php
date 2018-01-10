@@ -4,6 +4,7 @@ namespace Application\Form;
 
 use Application\Validator\DateCompare;
 use Zend\Form\Element\File;
+use Zend\Form\Element\Select;
 use Zend\Form\Element\Submit;
 use Zend\Form\Element\Textarea;
 use Zend\Form\Form;
@@ -47,6 +48,11 @@ class MeetupEditForm extends Form implements InputFilterProviderInterface
         $endingDate->setLabel('Ending Date');
         $endingDate->setAttribute('class', 'datepicker form-control');
         $this->add($endingDate);
+
+        $organizer = new Select('organizer');
+        $organizer->setLabel('Organizer');
+        $organizer->setAttribute('class', 'form-control');
+        $this->add($organizer);
 
         $file = new File('img');
         $file->setLabel('Meetup img');

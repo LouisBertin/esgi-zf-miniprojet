@@ -44,6 +44,15 @@ $form = $this->form; /* @var $form \Zend\Form\Form */
 
 <div class="form-group">
     <?php
+    $organizer = $form->get('organizer');
+    echo $this->formLabel($organizer);
+    echo $this->formSelect($organizer);
+    echo $this->formElementErrors($organizer);
+    ?>
+</div>
+
+<div class="form-group">
+    <?php
     $img = $form->get('img');
     echo $this->formLabel($img);
     echo $this->formFile($img);

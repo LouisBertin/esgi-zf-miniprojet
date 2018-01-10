@@ -15,6 +15,7 @@ use Application\Controller\OrganizerController;
 use Application\Controller\OrganizerControllerFactory;
 use Application\Form\ContactForm;
 use Application\Form\MeetupEditForm;
+use Application\Form\MeetupFormFactory;
 use Application\Form\OrganizerForm;
 use Application\Helper\MeetupImg;
 use Application\Helper\MeetupImgFactory;
@@ -148,7 +149,7 @@ return [
     ],
     'service_manager' => [
         'factories' => [
-            MeetupForm::class => InvokableFactory::class,
+            MeetupForm::class => MeetupFormFactory::class,
             MeetupEditForm::class => InvokableFactory::class,
             ContactForm::class => InvokableFactory::class,
             OrganizerForm::class => InvokableFactory::class

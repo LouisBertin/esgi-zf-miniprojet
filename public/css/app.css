@@ -11,6 +11,10 @@ header{
     background-size: cover;
 }
 
+.home-title {
+    color: #1abc9c;
+}
+
 .meetup-block {
     background: #ecf0f1;
 }

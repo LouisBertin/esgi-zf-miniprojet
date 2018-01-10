@@ -24,6 +24,7 @@ final class MeetupControllerFactory
     {
         /** @var EntityManager $em */
         $em = $container->get(EntityManager::class);
+        /** @var MeetupRepository $meetupRepository */
         $meetupRepository = $em->getRepository(Meetup::class);
         /** @var MeetupForm $meetupForm */
         $meetupForm = $container->get(MeetupForm::class);

@@ -83,7 +83,8 @@ final class MeetupController extends AbstractActionController
                     throw new \Exception('unknown error with img');
                 }
 
-                $meetup = $this->meetupRepository->create($data['title'], $data['description'], $data['startingDate'], $data['endingDate'], $fileName);
+                /** @var Meetup $meetup */
+                $meetup = $this->meetupRepository->create($data['title'], $data['description'], $data['startingDate'], $data['endingDate'], $fileName, $data['organizer']);
                 $this->meetupRepository->add($meetup);
 
                 return $this->redirect()->toRoute('meetup');
@@ -107,6 +108,7 @@ final class MeetupController extends AbstractActionController
      * @return ViewModel
      * @throws \Doctrine\ORM\ORMException
      * @throws \Doctrine\ORM\OptimisticLockException
+     * @throws \Exception
      */
     public function editAction() : ViewModel
     {

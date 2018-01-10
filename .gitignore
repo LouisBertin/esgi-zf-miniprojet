@@ -8,3 +8,4 @@ phpunit.xml
 php-cs-fixer.phar
 .php_cs.cache
 public/img/meetup/*
+data/DoctrineORMModule

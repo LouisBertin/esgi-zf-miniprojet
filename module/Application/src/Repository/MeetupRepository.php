@@ -3,6 +3,7 @@
 namespace Application\Repository;
 
 use Application\Entity\Meetup;
+use Application\Entity\Organizer;
 use Doctrine\ORM\EntityRepository;
 
 /**
@@ -70,13 +71,22 @@ final class MeetupRepository extends EntityRepository
      * @param string $startingDate
      * @param string $endingDate
      * @param string $img
+     * @param string $organizer
      * @return Meetup
      */
-    public function create(string $title, string $description, string $startingDate, string $endingDate, string $img) : Meetup
+    public function create(string $title, string $description, string $startingDate, string $endingDate, string $img, string $organizer) : Meetup
     {
         $startingDate = new \DateTime($startingDate);
         $endingDate = new \DateTime($endingDate);
-        return new Meetup($title, $description, $startingDate, $endingDate, $img);
+        /** @var OrganizerRepository $organizerRepository */
+        $organizerRepository = $this->getEntityManager()->getRepository(Organizer::class);
+        /** @var Organizer $organizer */
+        $organizer = $organizerRepository->findById($organizer);
+        /** @var Meetup $meetup */
+        $meetup = new Meetup($title, $description, $startingDate, $endingDate, $img);
+        $meetup->addOrganizer($organizer);
+
+        return $meetup;
     }
 
     /**

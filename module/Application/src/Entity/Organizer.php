@@ -35,6 +35,12 @@ class Organizer
     private $email;
 
     /**
+     * One Product has Many Features.
+     * @ORM\OneToMany(targetEntity="Meetup", mappedBy="organizer")
+     */
+    private $meetup;
+
+    /**
      * Organizer constructor.
      * @param $lastname
      * @param $firstname
@@ -48,9 +54,9 @@ class Organizer
     }
 
     /**
-     * @return mixed
+     * @return int
      */
-    public function getId()
+    public function getId() : int
     {
         return $this->id;
     }
@@ -58,47 +64,47 @@ class Organizer
     /**
      * @param mixed $id
      */
-    public function setId($id)
+    public function setId($id): void
     {
         $this->id = $id;
     }
 
     /**
-     * @return mixed
+     * @return string
      */
-    public function getNom()
+    public function getLastname() : string
     {
-        return $this->nom;
+        return $this->lastname;
     }
 
     /**
-     * @param mixed $nom
+     * @param mixed $lastname
      */
-    public function setNom($nom)
+    public function setLastname($lastname): void
     {
-        $this->nom = $nom;
+        $this->lastname = $lastname;
     }
 
     /**
-     * @return mixed
+     * @return string
      */
-    public function getPrenom()
+    public function getFirstname() : string
     {
-        return $this->prenom;
+        return $this->firstname;
     }
 
     /**
-     * @param mixed $prenom
+     * @param mixed $firstname
      */
-    public function setPrenom($prenom)
+    public function setFirstname($firstname): void
     {
-        $this->prenom = $prenom;
+        $this->firstname = $firstname;
     }
 
     /**
-     * @return mixed
+     * @return string
      */
-    public function getEmail()
+    public function getEmail() : string
     {
         return $this->email;
     }
@@ -106,7 +112,7 @@ class Organizer
     /**
      * @param mixed $email
      */
-    public function setEmail($email)
+    public function setEmail($email): void
     {
         $this->email = $email;
     }
