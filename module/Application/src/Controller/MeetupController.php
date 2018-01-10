@@ -105,12 +105,12 @@ final class MeetupController extends AbstractActionController
     }
 
     /**
-     * @return ViewModel
+     * @return object
      * @throws \Doctrine\ORM\ORMException
      * @throws \Doctrine\ORM\OptimisticLockException
      * @throws \Exception
      */
-    public function editAction() : ViewModel
+    public function editAction() : object
     {
         /** @var Meetup $meetup */
         $meetup = $this->meetupRepository->getById($this->params('id'));
@@ -125,20 +125,25 @@ final class MeetupController extends AbstractActionController
                 $request->getPost()->toArray(),
                 $request->getFiles()->toArray()
             );
-            $form->setData($request->getPost());
+            $form->setData($data);
 
             if ($form->isValid()) {
-                $extension = explode('.', $data['img']['name']);
-                $extension = end($extension);
-                $fileName = time() . '.' . $extension;
+                $fileName = '';
+                if ($data['img']['size'] !== 0) {
+                    $extension = explode('.', $data['img']['name']);
+                    $extension = end($extension);
+                    $fileName = time() . '.' . $extension;
 
-                if ($data['img']['error'] === 0) {
-                    move_uploaded_file($data['img']['tmp_name'], $this->upload_path . $fileName);
+                    if ($data['img']['error'] === 0) {
+                        move_uploaded_file($data['img']['tmp_name'], $this->upload_path . $fileName);
+                    } else {
+                        throw new \Exception('error with uploaded image');
+                    }
                 } else {
-                    throw new \Exception('unknown error with img');
+                    $fileName = null;
                 }
 
-                $this->meetupRepository->edit($this->params('id'), $data['title'], $data['description'], $data['startingDate'], $data['endingDate'], $fileName);
+                $this->meetupRepository->edit($this->params('id'), $data['title'], $data['description'], $data['startingDate'], $data['endingDate'], $fileName, $data['organizer']);
 
                 return $this->redirect()->toRoute('meetup/edit', ['id' => $meetup->getId()]);
             }

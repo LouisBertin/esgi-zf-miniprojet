@@ -4,6 +4,7 @@ namespace Application\Repository;
 
 use Application\Entity\Meetup;
 use Application\Entity\Organizer;
+use Doctrine\ORM\EntityManager;
 use Doctrine\ORM\EntityRepository;
 
 /**
@@ -95,11 +96,14 @@ final class MeetupRepository extends EntityRepository
      * @param string $description
      * @param string $startingDate
      * @param string $endingDate
+     * @param $fileName
+     * @param string $organizer
      * @throws \Doctrine\ORM\ORMException
      * @throws \Doctrine\ORM\OptimisticLockException
      */
-    public function edit(int $id, string $title, string $description, string $startingDate, string $endingDate, $fileName) : void
+    public function edit(int $id, string $title, string $description, string $startingDate, string $endingDate, $fileName, string $organizer) : void
     {
+        /** @var EntityManager $em */
         $em = $this->getEntityManager();
         $meetup = $this->getById($id);
 
@@ -107,7 +111,12 @@ final class MeetupRepository extends EntityRepository
         $meetup->setDescription($description);
         $meetup->setStartingDate(\DateTime::createFromFormat('d/m/Y', $startingDate));
         $meetup->setEndingDate(\DateTime::createFromFormat('d/m/Y', $endingDate));
-        $meetup->setImg($fileName);
+        $fileName != null ? $meetup->setImg($fileName) : null;
+        /** @var OrganizerRepository $organizerRepository */
+        $organizerRepository = $this->getEntityManager()->getRepository(Organizer::class);
+        /** @var Organizer $organizer */
+        $organizer = $organizerRepository->findById($organizer);
+        $meetup->addOrganizer($organizer);
 
         $em->flush();
     }

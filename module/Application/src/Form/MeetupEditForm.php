@@ -2,6 +2,7 @@
 
 namespace Application\Form;
 
+use Application\Repository\OrganizerRepository;
 use Application\Validator\DateCompare;
 use Zend\Form\Element\File;
 use Zend\Form\Element\Select;
@@ -21,11 +22,17 @@ use Zend\Validator\StringLength;
  */
 class MeetupEditForm extends Form implements InputFilterProviderInterface
 {
+    /** @var OrganizerRepository $organizerRepository */
+    private $organizerRepository;
+
     /**
-     * MeetupForm constructor.
+     * MeetupEditForm constructor.
+     * @param OrganizerRepository $organizerRepository
      */
-    public function __construct()
+    public function __construct(OrganizerRepository $organizerRepository)
     {
+        $this->organizerRepository = $organizerRepository;
+
         parent::__construct();
         $this->setAttribute('method', 'post');
 
@@ -51,6 +58,7 @@ class MeetupEditForm extends Form implements InputFilterProviderInterface
 
         $organizer = new Select('organizer');
         $organizer->setLabel('Organizer');
+        $organizer->setValueOptions($this->getOrganizers());
         $organizer->setAttribute('class', 'form-control');
         $this->add($organizer);
 
@@ -63,6 +71,20 @@ class MeetupEditForm extends Form implements InputFilterProviderInterface
         $submit->setValue('Submit');
         $submit->setAttribute('value', 'Create');
         $this->add($submit);
+    }
+
+    /**
+     * @return array
+     */
+    public function getOrganizers() : array
+    {
+        $organizers = $this->organizerRepository->getAll();
+        $results = [];
+        foreach ($organizers as $value){
+            $results[$value['id']] = $value['lastname'];
+        }
+
+        return $results;
     }
 
     /**
