@@ -1,6 +1,8 @@
 Zf Mini Projet
 =============
 
+version 1.0
+
 ## Introduction
 A project developed for the ZendFramework course at ESGI school in Paris
 
