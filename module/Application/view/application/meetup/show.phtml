@@ -1,0 +1,20 @@
+<h3>Meetups list :</h3>
+
+<u><a class="pull-right" style="text-decoration: underline" href="<?= $this->url('meetup/add') ?>">add meetup</a></u>
+<br><br>
+
+<div class="row meetup-list">
+    <?php foreach ($meetups as $meetup): ?>
+        <div class="col-md-4">
+            <div class="meetup-block">
+                <img src="<?php echo $this->meetupImg($meetup['img']) ?>" alt="" width="100%">
+                <div class="content">
+                    <a href="<?php echo $this->url('meetup/view', ['id' => $meetup['id']]) ?>"><?php echo $meetup['title'] ?></a><br>
+                    <?php echo $meetup['startingDate']->format('d-m-Y') ?> <br>
+                    <a href="<?php echo $this->url('meetup/edit', ['id' => $meetup['id']])?>">edit</a>
+                    <a href="<?php echo $this->url('meetup/delete', ['id' => $meetup['id']])?>" style="color: red">delete</a>
+                </div>
+            </div>
+        </div>
+    <?php endforeach; ?>
+</div>

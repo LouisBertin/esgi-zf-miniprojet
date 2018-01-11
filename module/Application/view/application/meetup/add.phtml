@@ -1,0 +1,66 @@
+<h3>add meetup</h3>
+<br>
+
+<?php
+$form = $this->form; /* @var $form \Zend\Form\Form */
+?>
+
+<?= $this->form()->openTag($form); ?>
+
+<div class="form-group">
+    <?php
+    $title = $form->get('title');
+    echo $this->formLabel($title);
+    echo $this->formText($title);
+    echo $this->formElementErrors($title);
+    ?>
+</div>
+
+<div class="form-group">
+    <?php
+    $description = $form->get('description');
+    echo $this->formLabel($description);
+    echo $this->formTextArea($description);
+    echo $this->formElementErrors($description);
+    ?>
+</div>
+
+<div class="form-group">
+    <?php
+    $organizer = $form->get('organizer');
+    echo $this->formLabel($organizer);
+    echo $this->formSelect($organizer);
+    echo $this->formElementErrors($organizer);
+    ?>
+</div>
+
+<div class="form-group">
+    <?php
+    $startingDate = $form->get('startingDate');
+    echo $this->formLabel($startingDate);
+    echo $this->formText($startingDate);
+    echo $this->formElementErrors($startingDate);
+    ?>
+</div>
+
+<div class="form-group">
+    <?php
+    $endingDate = $form->get('endingDate');
+    echo $this->formLabel($endingDate);
+    echo $this->formText($endingDate);
+    echo $this->formElementErrors($endingDate);
+    ?>
+</div>
+
+<div class="form-group">
+    <?php
+    $img = $form->get('img');
+    echo $this->formLabel($img);
+    echo $this->formFile($img);
+    echo $this->formElementErrors($img);
+    ?>
+</div>
+
+<?= $this->formSubmit($form->get('submit')); ?>
+
+<?= $this->form()->closeTag($form); ?>

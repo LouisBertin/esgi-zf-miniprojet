@@ -1,0 +1,11 @@
+<div class="meetup-view">
+    <h3> <?php echo $meetup->getTitle() ?></h3>
+    <p><small>organized by </small><?php echo $meetup->getOrganizer()->getLastName() ?> <?php echo $meetup->getOrganizer()->getFirstName() ?></p>
+</div>
+
+<img src="<?php echo $this->meetupImg($meetup->getImg())?>" alt="" width="100%"><br><br>
+
+<b>starting date :</b> <?php echo $meetup->getStartingDate()->format('d-m-Y') ?><br>
+<b>ending date :</b> <?php echo $meetup->getEndingDate()->format('d-m-Y') ?>
+
+<p><?php echo $meetup->getDescription() ?></p>
